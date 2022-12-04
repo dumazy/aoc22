@@ -1,4 +1,4 @@
-import 'package:day_01/day01/puzzle2.dart';
+import 'package:aoc22/day01/puzzle2.dart';
 import 'package:test/test.dart';
 
 const testInput = """1000
