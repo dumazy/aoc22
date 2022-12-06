@@ -1,4 +1,4 @@
-import 'package:aoc22/day05/puzzle1.dart';
+import 'package:aoc22/day05/puzzle2.dart';
 import 'package:test/test.dart';
 
 const testInput = """    [D]    
@@ -12,10 +12,10 @@ move 2 from 2 to 1
 move 1 from 1 to 2""";
 
 void main() {
-  late Puzzle1 puzzle;
+  late Puzzle2 puzzle;
 
   setUp(() {
-    puzzle = Puzzle1(testInput);
+    puzzle = Puzzle2(testInput);
   });
 
   test(
@@ -42,7 +42,7 @@ void main() {
     'Example result',
     () {
       final result = puzzle.execute();
-      expect(result, 'CMZ');
+      expect(result, 'MCD');
     },
   );
 }

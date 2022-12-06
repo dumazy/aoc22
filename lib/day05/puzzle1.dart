@@ -8,9 +8,8 @@ class Puzzle1 {
   String execute() {
     final parts = input.split('\n\n');
     final stacks = getStacks(parts.first);
-    final procedureInput = parts.last;
-
-    return '';
+    final movedStacks = executeProcedures(parts.last, stacks);
+    return movedStacks.map((stack) => stack.substring(stack.length - 1)).join();
   }
 
   List<String> getStacks(String stacksInput) {
@@ -37,5 +36,34 @@ class Puzzle1 {
     }
 
     return stacks;
+  }
+
+  List<String> executeProcedures(String procedureInput, List<String> stacks) {
+    final procedures = procedureInput.split('\n');
+    for (String procedure in procedures) {
+      final data = extractDataFromProcedure(procedure);
+      for (int times = 0; times < data[0]; times++) {
+        final fromIndex = data[1] - 1;
+        final toIndex = data[2] - 1;
+        final from = stacks[fromIndex].split('');
+        final to = stacks[toIndex].split('');
+        final crate = from.removeLast();
+        to.add(crate);
+        stacks[fromIndex] = from.join();
+        stacks[toIndex] = to.join();
+      }
+    }
+    return stacks;
+  }
+
+  List<int> extractDataFromProcedure(String procedure) {
+    //move 1 from 4 to 1
+    final regex = RegExp(r'^move ([0-9]+) from ([0-9]) to ([0-9])$');
+    final match = regex.firstMatch(procedure)!;
+    return [
+      match.group(1),
+      match.group(2),
+      match.group(3),
+    ].map((e) => int.parse(e!)).toList();
   }
 }
